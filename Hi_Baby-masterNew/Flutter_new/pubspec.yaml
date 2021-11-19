@@ -52,6 +52,7 @@ dependencies:
   video_player_web: ^2.0.4
   get: 
   video_player:
+  flutter_native_timezone: ^2.0.0
   
   
   

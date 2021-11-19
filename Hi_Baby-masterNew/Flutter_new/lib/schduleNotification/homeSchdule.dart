@@ -20,10 +20,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'notification.dart';
 
 class homeschdule extends StatefulWidget {
- 
   //final NotificationManager manager;
-    final NotificationManager manager;
-
+  final NotificationManager manager;
 
   const homeschdule({this.manager});
 
@@ -40,20 +38,12 @@ class _homeschduleState extends State<homeschdule> {
   @override
   void initState() {
     super.initState();
-    /*if (defaultTargetPlatform == TargetPlatform.android) {
-      _getIconResourceId();
-    }*/
-    // LocalNotificationManeger.setONNotificationReceive(onNotificationRecevie);
-    //LocalNotificationManeger.setONNotificationClick(onNotificationClick);
-    // notifyHelper = NotifyHelper();
-    notificationmanager = NotificationManager();
-    notificationmanager.initNotifications();
 
-    //notifyHelper.initializeNotification();
-    //notifyHelper.requestIOSPermissions();
+    notifyHelper = NotifyHelper();
+
+    notifyHelper.initializeNotification();
+    notifyHelper.requestIOSPermissions();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -188,23 +178,23 @@ class _homeschduleState extends State<homeschdule> {
 
                         if (snapshot.data[i]['repeatt'] == 'Daily') {
                           //final date = DateFormat.jm();
-                          String myTime = snapshot.data[i]['StartTime'];
+                          DateTime date = DateFormat.jm()
+                              .parse(snapshot.data[i]['StartTime']);
+
+                          var myTime = DateFormat("HH:mm").format(date);
                           //print(date);
                           print(myTime);
-                      
                           String myId = snapshot.data[i]['id'];
                           int id = int.parse(myId.toString());
-                          int h = int.parse(myTime.toString().split(":")[0]);
-                          print(id);
-                          print(h);
-                         // _scheduleAlarm();
-                           notificationmanager.showNotificationDaily(
-                              id,
-                              snapshot.data[i]['title'],
-                              snapshot.data[i]['note'],
-                              h,
-                              20);
+                          notifyHelper.scheduledNotification(
+                            int.parse(myTime.toString().split(":")[0]),
+                            int.parse(myTime.toString().split(":")[1]),
+                            id,
+                            snapshot.data[i]['title'],
+                            snapshot.data[i]['note'],
+                          );
                        
+
                           return AnimationConfiguration.staggeredList(
                               position: i,
                               child: SlideAnimation(
