@@ -173,13 +173,15 @@ class _LOgin2State extends State<LOgin2> {
       if (message['status'] == "faild") {
         showloading(context, "wrong", " Email already exists ");
         print('erorrr');
-      }
-      if (message['status'] == "success") {
+      } else {
         String username = _username2.text;
+        String email = _email.text;
+        String pass = _pass2.text;
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CreatProfile(username: username),
+              builder: (context) =>
+                  CreatProfile(username: username, email: email, pass: pass),
             ));
       }
     }
@@ -476,7 +478,6 @@ class _LOgin2State extends State<LOgin2> {
                 color: Colors.blueGrey,
                 spreadRadius: 0.1,
                 blurRadius: 1,
-
                 offset: Offset(0, 1))
           ]),
       child: Form(

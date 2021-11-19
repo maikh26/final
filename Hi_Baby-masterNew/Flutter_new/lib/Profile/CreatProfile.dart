@@ -21,7 +21,10 @@ import '../age.dart';
 
 class CreatProfile extends StatefulWidget {
   final String username;
-  CreatProfile({Key key, @required this.username}) : super(key: key);
+  final String email;
+  final String pass;
+  CreatProfile({Key key, @required this.username, @required this.email, @required this.pass})
+      : super(key: key);
 
   @override
   _CreatProfileState createState() => _CreatProfileState();
@@ -49,6 +52,10 @@ class _CreatProfileState extends State<CreatProfile> {
   @override
   Widget build(BuildContext context) {
     String username = widget.username;
+    String email = widget.email;
+        String pass = widget.pass;
+
+
     return Scaffold(
       body: Form(
         key: _globalkey,
@@ -114,13 +121,16 @@ class _CreatProfileState extends State<CreatProfile> {
                   child: RaisedButton(
                     color: Colors.blueGrey,
                     onPressed: () {
-                      addbaby(username, _name.text, _type.text, currentDate);
+                      addbaby(username, email,pass,_name.text, _type.text, currentDate);
                       Navigator.push(
-        context,
-        MaterialPageRoute(
-          // ignore: missing_required_param
-          builder: (context) => DashboardScreen(birthdat:DateFormat.yMd().format(currentDate).toString(),babyname:_name.text)
-        ));
+                          context,
+                          MaterialPageRoute(
+                              // ignore: missing_required_param
+                              builder: (context) => DashboardScreen(
+                                  birthdat: DateFormat.yMd()
+                                      .format(currentDate)
+                                      .toString(),
+                                  babyname: _name.text)));
                     },
                     child: circular
                         ? CircularProgressIndicator()
@@ -374,13 +384,15 @@ class _CreatProfileState extends State<CreatProfile> {
     );
   }
 
-  Future<String> addbaby(String username, String babyname, String baby_gender,
+  Future<String> addbaby(String username,String email,String pass ,String babyname, String baby_gender,
       DateTime birthday) async {
     var ROOT = Uri.parse("http://192.168.232.2/Hi_Baby/babyinfo.php");
 
     try {
       var map = new Map<String, dynamic>();
       map["username"] = username;
+      map["email"] = email;
+      map["pass"] = pass;
       map["babyname"] = babyname;
       map["baby_gender"] = baby_gender;
       map["birthday"] = DateFormat.yMd().format(birthday).toString();
