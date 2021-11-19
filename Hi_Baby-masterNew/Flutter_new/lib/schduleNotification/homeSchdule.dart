@@ -22,8 +22,8 @@ import 'notification.dart';
 class homeschdule extends StatefulWidget {
   //final NotificationManager manager;
   final NotificationManager manager;
-
-  const homeschdule({this.manager});
+  final String username;
+  const homeschdule({this.manager, this.username});
 
   @override
   _homeschduleState createState() => _homeschduleState();
@@ -60,9 +60,14 @@ class _homeschduleState extends State<homeschdule> {
     );
   }
 
-  Future getData() async {
+  Future getData(String username) async {
+
     var url = Uri.parse("http://192.168.232.2/Hi_Baby/GetData.php");
-    var respons = await http.get(url);
+        var map = new Map<String, dynamic>();
+            map["username"] = username;
+    var respons = await http.post(url, body: map);
+
+    //var respons = await http.get(url);
     var list = json.decode(respons.body);
     print(list);
     return list;
@@ -165,7 +170,7 @@ class _homeschduleState extends State<homeschdule> {
   _showData() {
     return Expanded(
         child: FutureBuilder(
-            future: getData(),
+            future: getData(widget.username),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasError) print(snapshot.error);
 
@@ -193,7 +198,6 @@ class _homeschduleState extends State<homeschdule> {
                             snapshot.data[i]['title'],
                             snapshot.data[i]['note'],
                           );
-                       
 
                           return AnimationConfiguration.staggeredList(
                               position: i,
@@ -253,7 +257,7 @@ class _homeschduleState extends State<homeschdule> {
                                                     ),
                                                     SizedBox(width: 4),
                                                     Text(
-                                                      "${snapshot.data[i]['StartTime']} - ${snapshot.data[i]['endTime']}",
+                                                      "${snapshot.data[i]['StartTime']}",
                                                       style: GoogleFonts.lato(
                                                         textStyle: TextStyle(
                                                             fontSize: 13,
@@ -305,8 +309,26 @@ class _homeschduleState extends State<homeschdule> {
                                     )),
                               ]))));
                         }
+                        /* if (snapshot.data[i]['datte'][0] <
+                            DateFormat.yMd().format(_selecteddate).toString()[0]) {
+                                   deleteTask(snapshot.data[i]['id']);
+                            }*/
                         if (snapshot.data[i]['datte'] ==
                             DateFormat.yMd().format(_selecteddate)) {
+                          DateTime date = DateFormat.jm()
+                              .parse(snapshot.data[i]['StartTime']);
+
+                          var myTime = DateFormat("HH:mm").format(date);
+
+                          String myId = snapshot.data[i]['id'];
+                          int id = int.parse(myId.toString());
+                          notifyHelper.scheduledNotification(
+                            int.parse(myTime.toString().split(":")[0]),
+                            int.parse(myTime.toString().split(":")[1]),
+                            id,
+                            snapshot.data[i]['title'],
+                            snapshot.data[i]['note'],
+                          );
                           return AnimationConfiguration.staggeredList(
                               position: i,
                               child: SlideAnimation(
@@ -365,7 +387,7 @@ class _homeschduleState extends State<homeschdule> {
                                                     ),
                                                     SizedBox(width: 4),
                                                     Text(
-                                                      "${snapshot.data[i]['StartTime']} - ${snapshot.data[i]['endTime']}",
+                                                      "${snapshot.data[i]['StartTime']}",
                                                       style: GoogleFonts.lato(
                                                         textStyle: TextStyle(
                                                             fontSize: 13,

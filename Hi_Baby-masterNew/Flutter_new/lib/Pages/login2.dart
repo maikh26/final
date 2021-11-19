@@ -130,12 +130,13 @@ class _LOgin2State extends State<LOgin2> {
         showdialog(context);
         String birthdat = responsebody['birthdat'];
         String babyname = responsebody['baby_name'];
+        String username = _username2.text;
 
         Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  DashboardScreen(birthdat: birthdat, babyname: babyname),
+                  DashboardScreen(birthdat: birthdat, babyname: babyname,username:username),
             ));
       } else {
         print('login failed');

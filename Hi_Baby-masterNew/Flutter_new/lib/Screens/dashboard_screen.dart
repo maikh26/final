@@ -19,8 +19,9 @@ import '../age.dart';
 class DashboardScreen extends StatefulWidget {
   final String birthdat;
   final String babyname;
+    final String username;
 
-  const DashboardScreen({Key key, this.birthdat, this.babyname})
+  const DashboardScreen({Key key, this.birthdat, this.babyname, this.username})
       : super(key: key);
 
   @override
@@ -37,6 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     String birthdat = widget.birthdat;
     String babyname = widget.babyname;
+    String username = widget.username;
 
     var dt = DateFormat.yMd().parse(birthdat);
     String vaccin =
@@ -172,7 +174,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => homeschdule(),
+                                        builder: (context) => homeschdule(username:username),
                                       ),
                                     );
                                   },
