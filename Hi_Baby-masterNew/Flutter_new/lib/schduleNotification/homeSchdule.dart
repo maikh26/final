@@ -47,6 +47,7 @@ class _homeschduleState extends State<homeschdule> {
 
   @override
   Widget build(BuildContext context) {
+             print(widget.username);
     return Scaffold(
       appBar: _appbar(),
       backgroundColor: context.theme.backgroundColor,
@@ -55,16 +56,16 @@ class _homeschduleState extends State<homeschdule> {
           _addTaskBar(),
           _addDateBar(),
           _showData(),
+
         ],
       ),
     );
   }
 
   Future getData(String username) async {
-
     var url = Uri.parse("http://192.168.232.2/Hi_Baby/GetData.php");
-        var map = new Map<String, dynamic>();
-            map["username"] = username;
+    var map = new Map<String, dynamic>();
+    map["username"] = username;
     var respons = await http.post(url, body: map);
 
     //var respons = await http.get(url);
@@ -172,6 +173,7 @@ class _homeschduleState extends State<homeschdule> {
         child: FutureBuilder(
             future: getData(widget.username),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
+
               if (snapshot.hasError) print(snapshot.error);
 
               return snapshot.hasData
@@ -179,6 +181,7 @@ class _homeschduleState extends State<homeschdule> {
                       itemCount: snapshot.data.length,
                       // ignore: missing_return
                       itemBuilder: (context, i) {
+
                         print(snapshot.data[i]['StartTime']);
 
                         if (snapshot.data[i]['repeatt'] == 'Daily') {

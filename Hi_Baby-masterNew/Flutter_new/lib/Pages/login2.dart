@@ -126,11 +126,14 @@ class _LOgin2State extends State<LOgin2> {
             responsebody['email'],
             responsebody['id'],
             responsebody['birthdat'],
-            responsebody['baby_name']);
+            responsebody['baby_name'],
+            );
         showdialog(context);
         String birthdat = responsebody['birthdat'];
         String babyname = responsebody['baby_name'];
-        String username = _username2.text;
+        String username = responsebody['username'];
+
+        //String username = _username2.text;
 
         Navigator.push(
             context,
