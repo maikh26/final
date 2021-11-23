@@ -47,7 +47,7 @@ class _homeschduleState extends State<homeschdule> {
 
   @override
   Widget build(BuildContext context) {
-             print(widget.username);
+    print(widget.username);
     return Scaffold(
       appBar: _appbar(),
       backgroundColor: context.theme.backgroundColor,
@@ -56,7 +56,6 @@ class _homeschduleState extends State<homeschdule> {
           _addTaskBar(),
           _addDateBar(),
           _showData(),
-
         ],
       ),
     );
@@ -160,7 +159,8 @@ class _homeschduleState extends State<homeschdule> {
           myButton(
               label: "+ Add Task",
               onTap: () async {
-                await Get.to(() => addTaskpage());
+                String username = widget.username;
+                await Get.to(() => addTaskpage(username: username));
               }),
         ],
       ),
@@ -173,7 +173,6 @@ class _homeschduleState extends State<homeschdule> {
         child: FutureBuilder(
             future: getData(widget.username),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-
               if (snapshot.hasError) print(snapshot.error);
 
               return snapshot.hasData
@@ -181,7 +180,6 @@ class _homeschduleState extends State<homeschdule> {
                       itemCount: snapshot.data.length,
                       // ignore: missing_return
                       itemBuilder: (context, i) {
-
                         print(snapshot.data[i]['StartTime']);
 
                         if (snapshot.data[i]['repeatt'] == 'Daily') {
@@ -560,19 +558,10 @@ class _homeschduleState extends State<homeschdule> {
       // context.themes.backgroundColor,
       leading: GestureDetector(
         onTap: () {
-          themeServices().switchtheme();
-
-          notifyHelper.displayNotification(
-            //await LocalNotificationManeger.showNotification();
-            title: "Theme Changed",
-            body: Get.isDarkMode
-                ? "Activated light Theme"
-                : "Activated Dark Theme",
-          );
-          //notifyHelper.scheduledNotification();
+          Get.back();
         },
         child: Icon(
-          Get.isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
+          Icons.arrow_back_ios,
           color: Get.isDarkMode ? Colors.white : Colors.black,
           size: 20,
         ),

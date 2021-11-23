@@ -10,7 +10,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class addTaskpage extends StatefulWidget {
-  const addTaskpage({Key key}) : super(key: key);
+  final String username;
+  const addTaskpage({Key key, @required this.username}) : super(key: key);
 
   @override
   State<addTaskpage> createState() => _addTaskpageState();
@@ -67,38 +68,16 @@ class _addTaskpageState extends State<addTaskpage> {
               ),
             ),
             Myinputfeild(
-                        title: "Time ",
-                        hint: _startTime,
-                        widget: IconButton(
-                            onPressed: () {
-                              _getTimefromUser(isStarttime: true);
-                            },
-                            icon: Icon(
-                              Icons.access_time_rounded,
-                              color: Colors.grey,
-                            ))),
-               
-            /*Row(
-              children: [
-                Expanded(
-                    child: Myinputfeild(
-                        title: "start Date",
-                        hint: _startTime,
-                        widget: IconButton(
-                            onPressed: () {
-                              _getTimefromUser(isStarttime: true);
-                            },
-                            icon: Icon(
-                              Icons.access_time_rounded,
-                              color: Colors.grey,
-                            )))),
-                SizedBox(
-                  width: 18,
-                ),
-               
-              ],
-            ),*/
-            
+                title: "Time ",
+                hint: _startTime,
+                widget: IconButton(
+                    onPressed: () {
+                      _getTimefromUser(isStarttime: true);
+                    },
+                    icon: Icon(
+                      Icons.access_time_rounded,
+                      color: Colors.grey,
+                    ))),
             Myinputfeild(
               title: "Repeat",
               hint: "$_selectedRepeat ",
@@ -171,7 +150,7 @@ class _addTaskpageState extends State<addTaskpage> {
                 myButton(
                     label: "Creat Task",
                     onTap: () {
-                      _addTask();
+                      _addTask(widget.username);
                       // Get.back();
                     }),
               ],
@@ -254,7 +233,7 @@ class _addTaskpageState extends State<addTaskpage> {
             minute: int.parse(_startTime.split(":")[1].split("")[0])));
   }
 
-  _addTask() async {
+  _addTask(String username) async {
     if (_titlecontroller.text.isEmpty || _notecontroller.text.isEmpty) {
       Get.snackbar("Required", "All fields are required",
           snackPosition: SnackPosition.BOTTOM,
@@ -264,6 +243,8 @@ class _addTaskpageState extends State<addTaskpage> {
       var url = Uri.parse("http://192.168.232.2/tasks/tasks.php");
 
       var map = Map<String, String>();
+      map['username'] = username;
+
       map['title'] = _titlecontroller.text;
       map['note'] = _notecontroller.text;
       map['isCompleted'] = "0";
