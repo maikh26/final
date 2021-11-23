@@ -1,5 +1,6 @@
 import 'package:blogapp/schduleNotification/homeSchdule.dart';
 import 'package:blogapp/schduleNotification/services.dart';
+import 'package:blogapp/vaccine/vaccineNotification.dart';
 import 'package:blogapp/vaccine/vaccinedes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/context_extensions.dart';
@@ -18,9 +19,15 @@ class vaccine extends StatefulWidget {
 }
 
 class _vaccineState extends State<vaccine> {
+  var notifyHelper;
   @override
   void initState() {
     super.initState();
+
+    notifyHelper = NotifyHelpervac();
+
+    notifyHelper.initializeNotification();
+    notifyHelper.requestIOSPermissions();
   }
 
   @override
@@ -53,6 +60,7 @@ class _vaccineState extends State<vaccine> {
             future: vaccineget(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasError) print(snapshot.error);
+              print(vaccin);
 
               return snapshot.hasData
                   ? ListView.builder(
@@ -60,7 +68,23 @@ class _vaccineState extends State<vaccine> {
                       // ignore: missing_return
                       itemBuilder: (context, i) {
                         print(snapshot.data[i]['name']);
+                        String birth = vaccin.toString().split("|")[1];
+                        String dd = '0';
+                        if (snapshot.data[i]['datt'] == '1') {
+                          String dd = '1';
+                        }
 
+                        if (dd == birth) {
+                          String myId = snapshot.data[i]['id'];
+                          int id = int.parse(myId.toString());
+                          notifyHelper.scheduledNotification(
+                            8,
+                            53,
+                            id,
+                            snapshot.data[i]['name'],
+                            snapshot.data[i]['name'],
+                          );
+                        }
                         return AnimationConfiguration.staggeredList(
                             position: i,
                             child: SlideAnimation(
@@ -69,8 +93,8 @@ class _vaccineState extends State<vaccine> {
                               GestureDetector(
                                   onTap: () {
                                     print(snapshot.data[i]['description']);
-                                    gotodetails(snapshot.data[i]['description']);
-                                    
+                                    gotodetails(
+                                        snapshot.data[i]['description']);
                                   },
                                   child: Container(
                                     padding:
@@ -175,7 +199,7 @@ class _vaccineState extends State<vaccine> {
         },
         child: Icon(
           Icons.arrow_back_ios,
-          color:  Colors.black,
+          color: Colors.black,
           size: 20,
         ),
       ),

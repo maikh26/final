@@ -106,7 +106,6 @@ class _LOgin2State extends State<LOgin2> {
     print(preferences.getString("id"));
     print(preferences.getString("birthdat"));
     print(preferences.getString("baby_name"));
-
     return perf;
   }
 
