@@ -4,40 +4,36 @@ import 'package:blogapp/schduleNotification/homeSchdule.dart';
 import 'package:blogapp/vaccine/vaccine.dart';
 import 'package:blogapp/videos/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+//import "colors.dart" as color;
+import 'package:blogapp/videos/colors.dart'  as color;
 
-import 'baby _sitter.dart';
-import 'doctor.dart';
-import 'gallary.dart';
-import 'shapedashboard.dart';
+import '../Pages/baby _sitter.dart';
+import '../Pages/doctor.dart';
+import '../Pages/gallary.dart';
+import '../Pages/shapedashboard.dart';
 
 class MyDashboard extends StatelessWidget {
-  
   const MyDashboard({Key key, String username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 50, // Set this height
-
-        backgroundColor: Colors.pink[300],
-        title: Text(
-          "",
-          //"${AgeCalculator.age(bodd, today: DateTime.now()).years.toString()} years |${AgeCalculator.age(bodd, today: DateTime.now()).months.toString()} Months | ${AgeCalculator.age(bodd, today: DateTime.now()).days.toString()} Days",
-          style: TextStyle(fontSize: 13),
-        ),
-      ),
       drawer: Drawer(),
+     
       body: Stack(
+    
         children: [
+
+        
           ClipPath(
             clipper: ShapeDashboard(),
             child: Container(
-              height: 250,
+              height: 200,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                colors: <Color>[Colors.pink[300], Colors.pink[300]],
+                colors: <Color>[Colors.deepPurple, Colors.grey[300]],
               )),
             ),
           ),
@@ -49,7 +45,9 @@ class MyDashboard extends StatelessWidget {
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    
                     children: const [
+                      
                       Text(
                         "",
                         style: TextStyle(
@@ -60,7 +58,7 @@ class MyDashboard extends StatelessWidget {
                       ),
                     ],
                   ),
-                 // const SizedBox(height: 15),
+                  // const SizedBox(height: 15),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -90,10 +88,11 @@ class MyDashboard extends StatelessWidget {
                                   children: const [
                                     Image(
                                       image: AssetImage(
-                                        "assets/memory.jpg",
+                                        "assets/cubes.png",
                                       ),
-                                    ),
-                                    Text("Baby gallary"),
+                                   height: 80,
+                                        width: 80 ),
+                                    Text("Development"),
                                   ],
                                 ),
                               ),
@@ -118,9 +117,10 @@ class MyDashboard extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Image(
-                                      image: AssetImage("assets/ola.jpg"),
-                                    ),
-                                    Text("Videos"),
+                                      image: AssetImage("assets/crib-toy.png"),
+                                   height: 80,
+                                        width: 80 ),
+                                    Text("Activities"),
                                   ],
                                 ),
                               ),
@@ -145,9 +145,11 @@ class MyDashboard extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Image(
-                                      image: AssetImage("assets/baby_doc.jpg"),
-                                    ),
-                                    Text("Baby doctors"),
+                                      image:
+                                          AssetImage("assets/musical-note.png"),
+                                   height: 80,
+                                        width: 80 ),
+                                    Text("Sound"),
                                   ],
                                 ),
                               ),
@@ -172,9 +174,10 @@ class MyDashboard extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Image(
-                                      image: AssetImage("assets/wite_note.jpg"),
-                                    ),
-                                    Text("Write Notes"),
+                                      image: AssetImage("assets/increase.png"),
+                                     height: 80,
+                                        width: 80),
+                                    Text("Growth"),
                                   ],
                                 ),
                               ),
@@ -199,9 +202,10 @@ class MyDashboard extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Image(
-                                      image: AssetImage("assets/mother4.jpg"),
-                                    ),
-                                    Text("Baby Sitter"),
+                                      image: AssetImage("assets/milk.png"),
+                                     height: 80,
+                                        width: 80),
+                                    Text("Feeding"),
                                   ],
                                 ),
                               ),
@@ -226,9 +230,12 @@ class MyDashboard extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Image(
-                                      image: AssetImage("assets/mother3.jpg"),
-                                    ),
-                                    Text("Mothers Group"),
+                                        image: AssetImage(
+                                          "assets/tooth.png",
+                                        ),
+                                        height: 80,
+                                        width: 80),
+                                    Text("Teeth"),
                                   ],
                                 ),
                               ),

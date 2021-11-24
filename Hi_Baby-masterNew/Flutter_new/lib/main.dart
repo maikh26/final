@@ -18,8 +18,7 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: unused_import
 
 // ignore: unused_import
-import 'Pages/dashboard.dart';
-import 'Pages/homepageNew.dart';
+import 'grouth/homepageNew.dart';
 import 'Profile/CreatProfile.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
@@ -40,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: themes.light,
       darkTheme: themes.dark,
       themeMode: themeServices().theme,
-      home: LandingScreen(),
+      home: MyDashboard(),
     );
   }
 }

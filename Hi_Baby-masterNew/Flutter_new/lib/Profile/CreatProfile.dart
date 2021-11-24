@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'dart:io';
-import 'package:blogapp/Pages/homepageNew.dart';
+import 'package:blogapp/grouth/homepageNew.dart';
 import 'package:blogapp/Screens/dashboard_screen.dart';
 import 'package:blogapp/group.dart';
 import 'package:intl/intl.dart';
