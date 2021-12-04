@@ -37,6 +37,7 @@ dependencies:
   introduction_screen: ^2.1.0
   carousel_pro: ^1.0.0
   http: ^0.12.1
+  flutter_colorful_tab:
 
   get_storage: ^2.0.3
   json_annotation:

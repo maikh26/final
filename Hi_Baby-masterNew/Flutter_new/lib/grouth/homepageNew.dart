@@ -1,4 +1,5 @@
 import 'package:blogapp/Profile/ProfileScreen.dart';
+import 'package:blogapp/babydevelopment/babydev.dart';
 import 'package:blogapp/group.dart';
 import 'package:blogapp/schduleNotification/homeSchdule.dart';
 import 'package:blogapp/vaccine/vaccine.dart';
@@ -77,7 +78,7 @@ class MyDashboard extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => gallery(),
+                                    builder: (context) => MyHomePage(),
                                   ),
                                 );
                               },
@@ -241,60 +242,7 @@ class MyDashboard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          /*Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => vaccine(),
-                                  ),
-                                );
-                              },
-                              splashColor: Colors.blue,
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Image(
-                                      image: AssetImage("assets/mom.png"),
-                                    ),
-                                    Text("Vaccines"),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => group(),
-                                  ),
-                                );
-                              },
-                              splashColor: Colors.blue,
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Image(
-                                      image: AssetImage("assets/groth.jpg"),
-                                    ),
-                                    Text("Baby Development"),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )*/
+                         
                         ],
                       ),
                     ),
