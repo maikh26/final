@@ -3,6 +3,7 @@
 import 'package:blogapp/Pages/Home.dart';
 import 'package:blogapp/Pages/comment.dart';
 import 'package:blogapp/Pages/login2.dart';
+import 'package:blogapp/Screens/dashboard_screen.dart';
 import 'package:blogapp/group.dart';
 import 'package:blogapp/schduleNotification/homeSchdule.dart';
 import 'package:blogapp/schduleNotification/services.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       theme: themes.light,
       darkTheme: themes.dark,
       themeMode: themeServices().theme,
-      home: MyDashboard(),
+      home: LOgin2(),
     );
   }
 }
