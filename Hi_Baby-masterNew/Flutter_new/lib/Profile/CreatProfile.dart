@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:blogapp/grouth/homepageNew.dart';
 import 'package:blogapp/Screens/dashboard_screen.dart';
 import 'package:blogapp/group.dart';
+import 'package:blogapp/homepage/home.dart';
 import 'package:intl/intl.dart';
 import 'package:blogapp/NetworkHandler.dart';
 import 'package:blogapp/Pages/Home.dart';
@@ -126,7 +127,7 @@ class _CreatProfileState extends State<CreatProfile> {
                           context,
                           MaterialPageRoute(
                               // ignore: missing_required_param
-                              builder: (context) => DashboardScreen(
+                              builder: (context) => MyHomePage(
                                   birthdat: DateFormat.yMd()
                                       .format(currentDate)
                                       .toString(),

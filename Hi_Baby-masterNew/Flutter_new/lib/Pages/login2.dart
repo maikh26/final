@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:blogapp/Profile/CreatProfile.dart';
 import 'package:blogapp/Screens/dashboard_screen.dart';
 import 'package:blogapp/background-image.dart';
+import 'package:blogapp/homepage/home.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -138,7 +139,7 @@ class _LOgin2State extends State<LOgin2> {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  DashboardScreen(birthdat: birthdat, babyname: babyname,username:username),
+                  MyHomePage(birthdat: birthdat, babyname: babyname,username:username),
             ));
       } else {
         print('login failed');

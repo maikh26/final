@@ -62,7 +62,7 @@ class TextStyles {
     fontSize: 16,
     letterSpacing: 1.4,
     fontWeight: FontWeight.w700,
-    color: Colors.white.withOpacity(0.5),
+    color: Colors.black,
     fontFamily: 'Ubuntu',
   );
   static final TextStyle body3TextStyle = TextStyle(
