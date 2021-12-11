@@ -25,6 +25,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'Screens/landing_screen.dart';
 import 'homepage/home.dart';
+import 'homepage/homepage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
