@@ -7,14 +7,11 @@ import 'news_en.dart';
 //import '../models/models.dart';
 //import '../widgets/widgets.dart';
 
-
-
-
- 
 class NewsScreen extends StatefulWidget {
-  final News news;
+  final String des;
+  final String title;
 
-  NewsScreen({this.news});
+  NewsScreen({this.des, this.title});
 
   @override
   _NewsScreenState createState() => _NewsScreenState();
@@ -47,7 +44,8 @@ class _NewsScreenState extends State<NewsScreen> {
       });
     });
   }
- //*********************************** iOS & Android device TTS setup**********
+
+  //*********************************** iOS & Android device TTS setup**********
   void speechSettingsAndroid() {
     _flutterTts.setLanguage("en-US");
     //_flutterTts.setLanguage("bn-IN");
@@ -84,8 +82,9 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-     String description = widget.news.description;
-
+    // String description = widget.news.description;
+    String description = widget.des;
+    String title = widget.title;
 
     return Scaffold(
       body: ListView(
@@ -118,7 +117,6 @@ class _NewsScreenState extends State<NewsScreen> {
                     iconSize: 30.0,
                     color: Theme.of(context).buttonColor,
                   ),
-                 
                 ],
               ),
               //**************************** Button action *********************
@@ -154,7 +152,6 @@ class _NewsScreenState extends State<NewsScreen> {
                   ),
                 ),
               ),
-             
             ],
           ),
           Padding(
@@ -163,7 +160,7 @@ class _NewsScreenState extends State<NewsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  widget.news.title.toUpperCase(),
+                  title.toUpperCase(),
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -171,13 +168,13 @@ class _NewsScreenState extends State<NewsScreen> {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10.0),
-               
+
                 //************************** Description ***********************
                 Container(
                   height: 300.0,
                   child: SingleChildScrollView(
                     child: Text(
-                      widget.news.description,
+                      description,
                       style: TextStyle(fontSize: 15.0),
                       textAlign: TextAlign.justify,
                     ),
@@ -186,7 +183,6 @@ class _NewsScreenState extends State<NewsScreen> {
               ],
             ),
           ),
-        
         ],
       ),
     );

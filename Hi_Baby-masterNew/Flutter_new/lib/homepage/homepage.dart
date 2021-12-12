@@ -73,62 +73,68 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         );
       },
-      child: GestureDetector(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => NewsScreen(news: breaking_news[index]),
-          ),
-        ),
-        child: Stack(
-          children: <Widget>[
-            Center(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black54,
-                      offset: Offset(0.0, 4.0),
-                      blurRadius: 10.0,
-                    ),
-                  ],
+      child: FutureBuilder(
+          future: getData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasError) print(snapshot.error);
+            return GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => NewsScreen(des: snapshot.data[index]['development'],title:snapshot.data[index]['title']),
                 ),
-                child: Center(
-                  child: Hero(
-                    tag: 'assets/images/cring.jpg',
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image(
-                        image: AssetImage('assets/images/cring.jpg'),
-                        height: 220.0,
-                        fit: BoxFit.cover,
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black54,
+                            offset: Offset(0.0, 4.0),
+                            blurRadius: 10.0,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Hero(
+                          tag: 'assets/images/cring.jpg',
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image(
+                              image: AssetImage('assets/images/cring.jpg'),
+                              height: 220.0,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            //Breaking news text details
-            Positioned(
-              left: 28.0,
-              bottom: 28.0,
-              child: Container(
-                width: 250.0,
-                child: Text(
-                  breaking_news[index].title.toUpperCase(),
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.bold,
+                  //Breaking news text details
+                  Positioned(
+                    left: 28.0,
+                    bottom: 28.0,
+                    child: Container(
+                      width: 250.0,
+                      child: Text(
+                        snapshot.data[index]['title'].toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-            ),
-          ],
-        ),
-      ),
+            );
+          }),
     );
   }
 
@@ -197,10 +203,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                
 
                 //Top slider starts from here
-                
+
                 //News category starts from here
                 //NewsCategories(),
                 SingleChildScrollView(
@@ -491,12 +496,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                 Container(
+                Container(
                   height: 280.0,
                   width: double.infinity,
                   child: PageView.builder(
                     controller: _pageController,
-                    itemCount: breaking_news.length,
+                    itemCount: 1,
                     itemBuilder: (BuildContext context, int index) {
                       return _newsSelector(index);
                     },
@@ -510,7 +515,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   imageHeight: 250.0,
                   imageWidth: 150.0,
                 ),
-                
               ],
             ),
           ),

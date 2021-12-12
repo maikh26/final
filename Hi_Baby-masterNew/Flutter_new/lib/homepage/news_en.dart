@@ -22,7 +22,7 @@ final List<News> breaking_news = [
 
     date: '26-Nov-2020',
     description:
-        ' Its only been a week, but your newborn already knows they can rely on you. By now, they can recognize your voice, and the familiarity helps them adjust to the strange new world outside the womb. They cant understand your words, but talk to them often as an expression of love and comfort. ',
+        ' , but your newborn already knows they can rely on you. By now, they can recognize your voice, and the familiarity helps them adjust to the strange new world outside the womb. They cant understand your words, but talk to them often as an expression of love and comfort. ',
     screenshots: [
       'assets/images/cring.jpg',
      // 'assets/images/news_en/innovation-grant.jpeg',
