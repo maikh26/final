@@ -554,7 +554,8 @@ class _homeschduleState extends State<homeschdule> {
   _appbar() {
     return AppBar(
       elevation: 0,
-      //backgroundColor: context.themes.backgroundColor,
+      backgroundColor: Colors.teal,
+
       // context.themes.backgroundColor,
       leading: GestureDetector(
         onTap: () {

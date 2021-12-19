@@ -5,6 +5,7 @@ import 'package:blogapp/grouth/homepageNew.dart';
 import 'package:blogapp/Screens/dashboard_screen.dart';
 import 'package:blogapp/group.dart';
 import 'package:blogapp/homepage/home.dart';
+import 'package:blogapp/homepage/homepage.dart';
 import 'package:intl/intl.dart';
 import 'package:blogapp/NetworkHandler.dart';
 import 'package:blogapp/Pages/Home.dart';
@@ -24,7 +25,11 @@ class CreatProfile extends StatefulWidget {
   final String username;
   final String email;
   final String pass;
-  CreatProfile({Key key, @required this.username, @required this.email, @required this.pass})
+  CreatProfile(
+      {Key key,
+      @required this.username,
+      @required this.email,
+      @required this.pass})
       : super(key: key);
 
   @override
@@ -54,8 +59,7 @@ class _CreatProfileState extends State<CreatProfile> {
   Widget build(BuildContext context) {
     String username = widget.username;
     String email = widget.email;
-        String pass = widget.pass;
-
+    String pass = widget.pass;
 
     return Scaffold(
       body: Form(
@@ -71,18 +75,14 @@ class _CreatProfileState extends State<CreatProfile> {
             SizedBox(
               height: 20,
             ),
-            togglebutton(),
+            /*togglebutton(),
             SizedBox(
               height: 20,
-            ),
+            ),*/
             SizedBox(
               height: 20,
             ),
             dob(),
-            SizedBox(
-              height: 20,
-            ),
-            age(),
             SizedBox(
               height: 20,
             ),
@@ -122,12 +122,13 @@ class _CreatProfileState extends State<CreatProfile> {
                   child: RaisedButton(
                     color: Colors.blueGrey,
                     onPressed: () {
-                      addbaby(username, email,pass,_name.text, _type.text, currentDate);
+                      addbaby(username, email, pass, _name.text, _type.text,
+                          currentDate);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               // ignore: missing_required_param
-                              builder: (context) => MyHomePage(
+                              builder: (context) => HomeScreen(
                                   birthdat: DateFormat.yMd()
                                       .format(currentDate)
                                       .toString(),
@@ -315,48 +316,6 @@ class _CreatProfileState extends State<CreatProfile> {
   }
   // ignore: missing_return
 
-  Widget age() {
-    return Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        padding: EdgeInsets.all(15),
-        height: 120,
-        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Expanded(
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Age"),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: AgeCalculator.age(currentDate,
-                                  today: DateTime.now())
-                              .years
-                              .toString(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 28),
-                        ),
-                        TextSpan(
-                          text: ' Years',
-                          style: TextStyle(fontWeight: FontWeight.normal),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                      "${AgeCalculator.age(currentDate, today: DateTime.now()).months.toString()} Months | ${AgeCalculator.age(currentDate, today: DateTime.now()).days.toString()} Days"),
-                ],
-              ),
-            ),
-          ),
-        ] //CustomDivider(),
-
-            ));
-  }
-
   Widget titleTextField() {
     return TextFormField(
       controller: _title,
@@ -385,8 +344,8 @@ class _CreatProfileState extends State<CreatProfile> {
     );
   }
 
-  Future<String> addbaby(String username,String email,String pass ,String babyname, String baby_gender,
-      DateTime birthday) async {
+  Future<String> addbaby(String username, String email, String pass,
+      String babyname, String baby_gender, DateTime birthday ) async {
     var ROOT = Uri.parse("http://192.168.232.2/Hi_Baby/babyinfo.php");
 
     try {
@@ -397,6 +356,7 @@ class _CreatProfileState extends State<CreatProfile> {
       map["babyname"] = babyname;
       map["baby_gender"] = baby_gender;
       map["birthday"] = DateFormat.yMd().format(birthday).toString();
+
       final response = await http.post(ROOT, body: map);
       print("addBaby>> Response:: ${response.body}");
       return response.body;

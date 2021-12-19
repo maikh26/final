@@ -26,6 +26,7 @@ class _videoInfoState extends State<videoInfo> {
   bool _disposed = false;
   int _isplayingindex = -1;
   VideoPlayerController _controller;
+
   _initData() async {
     await DefaultAssetBundle.of(context)
         .loadString("json/videoInfo.json")
@@ -105,7 +106,7 @@ class _videoInfoState extends State<videoInfo> {
                         height: 30,
                       ),
                       Text(
-                        "Play with your baby",
+                        "baby Sleep",
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold,
@@ -172,7 +173,7 @@ class _videoInfoState extends State<videoInfo> {
                       width: 30,
                     ),
                     Text(
-                      "Games can you play with your baby",
+                      "How to make your baby sleep",
                       style: TextStyle(
                           fontSize: 20,
                           fontStyle: FontStyle.italic,
@@ -227,7 +228,7 @@ class _videoInfoState extends State<videoInfo> {
           min: 0,
           max: 100,
           divisions: 100,
-          label: _position?.toString().split(".")[0],
+          label: _position?.toString().split(":")[0],
           onChanged: (Value) {
             setState(() {
               _progress = Value * 0.01;

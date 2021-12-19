@@ -69,22 +69,49 @@ class _vaccineState extends State<vaccine> {
                       itemBuilder: (context, i) {
                         print(snapshot.data[i]['name']);
                         String birth = vaccin.toString().split("|")[1];
-                        String dd = '0';
-                        if (snapshot.data[i]['datt'] == '1') {
-                          String dd = '1';
-                        }
+                      String year = vaccin.toString().split("|")[0];
 
-                        if (dd == birth) {
-                          String myId = snapshot.data[i]['id'];
-                          int id = int.parse(myId.toString());
+                        print(birth);
+
+if ( year==1 && birth =='0') {
+                          String dd = birth;
+                            print(snapshot.data[15]['name']);
+                         // int id = int.parse(myId.toString());
                           notifyHelper.scheduledNotification(
-                            8,
-                            53,
-                            id,
-                            snapshot.data[i]['name'],
-                            snapshot.data[i]['name'],
+                            5,
+                            10,
+                            1,
+                            'your baby  finished  one year',
+                           'vaccine this month '+ snapshot.data[15]['name'],
                           );
                         }
+                        if ( (year==1 && birth =='6') && snapshot.data[i]['dat'] == '18') {
+
+                          String dd = birth;
+                            print(snapshot.data[i]['name']);
+                         // int id = int.parse(myId.toString());
+                          notifyHelper.scheduledNotification(
+                            5,
+                            10,
+                            1,
+                            'your baby  finished  one year',
+                           'vaccine this month '+ snapshot.data[i]['name'],
+                          );
+                        }
+                        if (snapshot.data[i]['dat'] == birth) {
+                          String dd = birth;
+                            print(snapshot.data[i]['name']);
+                         // int id = int.parse(myId.toString());
+                          notifyHelper.scheduledNotification(
+                            5,
+                            10,
+                            1,
+                            'your baby  finished  month $birth',
+                           'vaccine this month '+ snapshot.data[i]['name'],
+                          );
+                        }
+
+                      
                         return AnimationConfiguration.staggeredList(
                             position: i,
                             child: SlideAnimation(
@@ -187,7 +214,7 @@ class _vaccineState extends State<vaccine> {
       elevation: 0,
       //backgroundColor: context.themes.backgroundColor,
       // context.themes.backgroundColor,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.teal,
       title: Text(
         "    Vaccine Table",
         style: Headingstyle,

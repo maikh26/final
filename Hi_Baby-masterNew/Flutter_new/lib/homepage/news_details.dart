@@ -10,8 +10,9 @@ import 'news_en.dart';
 class NewsScreen extends StatefulWidget {
   final String des;
   final String title;
+ final String image;
 
-  NewsScreen({this.des, this.title});
+  NewsScreen({this.des, this.title, this.image});
 
   @override
   _NewsScreenState createState() => _NewsScreenState();
@@ -85,6 +86,7 @@ class _NewsScreenState extends State<NewsScreen> {
     // String description = widget.news.description;
     String description = widget.des;
     String title = widget.title;
+    String image = widget.image;
 
     return Scaffold(
       body: ListView(
@@ -94,7 +96,7 @@ class _NewsScreenState extends State<NewsScreen> {
               Container(
                 transform: Matrix4.translationValues(0.0, -50.0, 0.0),
                 child: Hero(
-                  tag: 'assets/images/cring.jpg',
+                  tag: image,
                   child: ClipShadowPath(
                     clipper: CircularClipper(),
                     shadow: Shadow(blurRadius: 20.0),
@@ -102,7 +104,7 @@ class _NewsScreenState extends State<NewsScreen> {
                       height: 350.0,
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/images/cring.jpg'),
+                      image: AssetImage(image),
                     ),
                   ),
                 ),

@@ -2,6 +2,7 @@ import 'package:blogapp/homepage/news_en.dart';
 import 'package:flutter/material.dart';
 
 import 'content_scroll.dart';
+import 'custom_drawer.dart';
 import 'devlist.dart';
 import 'news_details.dart';
 //import 'news_en.dart';
@@ -23,9 +24,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../age.dart';
-//import '../models/models.dart';
-//import '../screens/screens.dart';
-//import '../widgets/widgets.dart';
+
 
 class HomeScreen extends StatefulWidget {
   final String birthdat;
@@ -56,7 +55,63 @@ class _HomeScreenState extends State<HomeScreen> {
     return list;
   }
 
+  birthday() {
+    var dt = DateFormat.yMd().parse(widget.birthdat);
+
+    int years = AgeCalculator.age(dt, today: DateTime.now()).years;
+    int month = AgeCalculator.age(dt, today: DateTime.now()).months;
+    int day = AgeCalculator.age(dt, today: DateTime.now()).days;
+    int index1 = 0;
+
+    if (years == 0 && month == 0) {
+      if (1 <= day && day <= 7) {
+        index1 = 1;
+      } else if (8 <= day && day <= 14) {
+        index1 = 2;
+      } else if (15 <= day && day <= 21) {
+        index1 = 3;
+      } else if (22 <= day && day <= 31) {
+        index1 = 4;
+      }
+    }
+    print(day);
+    print(month);
+    print(years);
+    print(index1);
+
+    return index1;
+  }
+
   _newsSelector(int index) {
+    //int ind = birthday();
+    var dt = DateFormat.yMd().parse(widget.birthdat);
+
+    int years = AgeCalculator.age(dt, today: DateTime.now()).years;
+    int month = AgeCalculator.age(dt, today: DateTime.now()).months;
+    int day = AgeCalculator.age(dt, today: DateTime.now()).days;
+    int index1 = 0;
+
+    if (years == 0 && month == 0) {
+      if (1 <= day && day <= 7) {
+        index1 = 0;
+      } else if (8 <= day && day <= 14) {
+        index1 = 1;
+      } else if (15 <= day && day <= 21) {
+        index1 = 2;
+      } else if (22 <= day && day <= 31) {
+        index1 = 3;
+      }
+    } else if (years == 0 && month == 1) {
+      index1 = 4;
+    } else if (years == 0 && month == 2) {
+      index1 = 5;
+    } else if (years == 0 && month == 3) {
+      index1 = 6;
+    } else if (years == 0 && month == 4) {
+      index1 = 7;
+    } else if (years == 0 && month == 5) {
+      index1 = 8;
+    }
     return AnimatedBuilder(
       animation: _pageController,
       builder: (BuildContext context, Widget widget) {
@@ -81,7 +136,10 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => NewsScreen(des: snapshot.data[index]['development'],title:snapshot.data[index]['title']),
+                  builder: (_) => NewsScreen(
+                      des: snapshot.data[index1]['development'],
+                      title: snapshot.data[index1]['title'],
+                      image:snapshot.data[index1]['image']),
                 ),
               ),
               child: Stack(
@@ -102,12 +160,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: Center(
                         child: Hero(
-                          tag: 'assets/images/cring.jpg',
+                          tag:snapshot.data[index1]['image'],
+
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
                             child: Image(
-                              image: AssetImage('assets/images/cring.jpg'),
-                              height: 220.0,
+                              image: AssetImage(snapshot.data[index1]['image'],
+                               
+                                    ),
+                              height: 280.0,
+                              width:double.infinity,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -115,6 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+
                   //Breaking news text details
                   Positioned(
                     left: 28.0,
@@ -122,9 +185,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Container(
                       width: 250.0,
                       child: Text(
-                        snapshot.data[index]['title'].toUpperCase(),
+                        snapshot.data[index1]['title'].toUpperCase(),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -153,16 +216,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final bool displayMobileLayout = MediaQuery.of(context).size.width < 600;
     return Row(
       children: [
-        /* if (!displayMobileLayout)
-          const AppDrawer(
-            permanentlyDisplay: true,
-          ),*/
         Expanded(
           child: Scaffold(
             appBar: AppBar(
               toolbarHeight: 70, // Set this height
 
-              backgroundColor: Colors.blueGrey,
+              backgroundColor: Colors.teal,
               title: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -171,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: <TextSpan>[
                       TextSpan(
                         text:
-                            "   \n   ${AgeCalculator.age(dt, today: DateTime.now()).years.toString()} years |${AgeCalculator.age(dt, today: DateTime.now()).months.toString()} Months | ${AgeCalculator.age(dt, today: DateTime.now()).days.toString()} Days",
+                            "   \n  ${AgeCalculator.age(dt, today: DateTime.now()).years.toString()} years |${AgeCalculator.age(dt, today: DateTime.now()).months.toString()} Months | ${AgeCalculator.age(dt, today: DateTime.now()).days.toString()} Days",
                         style: TextStyle(
                           fontSize: 16,
                         ),
@@ -179,7 +238,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ]),
               ),
             ),
-            drawer: Drawer(),
+            drawer: displayMobileLayout
+                ? const AppDrawer(
+                    permanentlyDisplay: false,
+                  )
+                : null,
             /* drawer: displayMobileLayout
                 ? const AppDrawer(
                     permanentlyDisplay: false,
@@ -229,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: Colors.brown[100],
+                                  color: Colors.brown[50],
                                 ),
                                 child: InkWell(
                                   onTap: () {
@@ -266,7 +329,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.brown[100],
+                                    color: Colors.brown[50],
                                   ),
                                   child: InkWell(
                                     onTap: () {
@@ -300,7 +363,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.brown[100],
+                                    color: Colors.brown[50],
                                   ),
                                   child: InkWell(
                                     onTap: () {
@@ -333,7 +396,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.brown[100],
+                                    color: Colors.brown[50],
                                   ),
                                   child: InkWell(
                                     onTap: () {
@@ -366,14 +429,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.brown[100],
+                                    color: Colors.brown[50],
                                   ),
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => MyDashboard(),
+                                          builder: (context) => vaccine(vaccin:vaccin),
                                         ),
                                       );
                                     },
@@ -399,7 +462,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.brown[100],
+                                    color: Colors.brown[50],
                                   ),
                                   child: InkWell(
                                     onTap: () {
@@ -432,7 +495,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.brown[100],
+                                    color: Colors.brown[50],
                                   ),
                                   child: InkWell(
                                     onTap: () {
@@ -465,7 +528,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.brown[100],
+                                    color: Colors.brown[50],
                                   ),
                                   child: InkWell(
                                     onTap: () {
@@ -496,6 +559,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
+
                 Container(
                   height: 280.0,
                   width: double.infinity,
@@ -511,7 +575,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //Content scrall starts from here
                 ContentScroll(
                   imageUrl: trending_pic,
-                  title: 'Trending',
+                  title: 'For You',
                   imageHeight: 250.0,
                   imageWidth: 150.0,
                 ),

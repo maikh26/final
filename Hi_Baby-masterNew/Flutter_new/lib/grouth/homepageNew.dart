@@ -13,6 +13,7 @@ import '../Pages/baby _sitter.dart';
 import '../Pages/doctor.dart';
 import '../Pages/gallary.dart';
 import '../Pages/shapedashboard.dart';
+import 'input_page.dart';
 
 class MyDashboard extends StatelessWidget {
   const MyDashboard({Key key, String username}) : super(key: key);
@@ -165,7 +166,7 @@ class MyDashboard extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => homeschdule(),
+                                    builder: (context) => InputPage(),
                                   ),
                                 );
                               },

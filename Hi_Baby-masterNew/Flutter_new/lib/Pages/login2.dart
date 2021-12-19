@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:blogapp/Profile/CreatProfile.dart';
 import 'package:blogapp/Screens/dashboard_screen.dart';
+import 'package:blogapp/Screens/landing_screen.dart';
 import 'package:blogapp/background-image.dart';
 import 'package:blogapp/homepage/home.dart';
 import 'package:blogapp/homepage/homepage.dart';
@@ -19,6 +20,8 @@ import 'Home.dart';
 import 'dart:io';
 
 import '../grouth/homepageNew.dart';
+import 'LoadingPage.dart';
+import 'forgetpass.dart';
 
 class LOgin2 extends StatefulWidget {
   const LOgin2({Key key}) : super(key: key);
@@ -123,12 +126,12 @@ class _LOgin2State extends State<LOgin2> {
       if (responsebody['status'] == "success") {
         print("done");
         savePref(
-            responsebody['username'],
-            responsebody['email'],
-            responsebody['id'],
-            responsebody['birthdat'],
-            responsebody['baby_name'],
-            );
+          responsebody['username'],
+          responsebody['email'],
+          responsebody['id'],
+          responsebody['birthdat'],
+          responsebody['baby_name'],
+        );
         showdialog(context);
         String birthdat = responsebody['birthdat'];
         String babyname = responsebody['baby_name'];
@@ -139,8 +142,8 @@ class _LOgin2State extends State<LOgin2> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  HomeScreen(birthdat: birthdat, babyname: babyname,username:username),
+              builder: (context) => HomeScreen(
+                  birthdat: birthdat, babyname: babyname, username: username),
             ));
       } else {
         print('login failed');
@@ -214,7 +217,7 @@ class _LOgin2State extends State<LOgin2> {
         child: Scaffold(
             body: Stack(children: <Widget>[
           Image.asset(
-            "assets/baby_mum.jpg",
+            "assets/loginphoto.jpg",
             height: height,
             fit: BoxFit.fitHeight,
           ),
@@ -251,7 +254,13 @@ class _LOgin2State extends State<LOgin2> {
                       children: <Widget>[
                         showsignin
                             ? InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => forgetpass(),
+                  ),
+                );
+                                },
                                 child: Text(
                                   "forget password ?",
                                   style: TextStyle(
@@ -267,7 +276,7 @@ class _LOgin2State extends State<LOgin2> {
                         RaisedButton(
                           elevation: 8,
                           color: showsignin
-                              ? Colors.blueGrey[300]
+                              ? Colors.pinkAccent.withOpacity(0.5)
                               : Colors.pinkAccent.withOpacity(0.5),
                           padding: EdgeInsets.symmetric(
                               vertical: 10, horizontal: 30),
@@ -324,18 +333,6 @@ class _LOgin2State extends State<LOgin2> {
       duration: Duration(milliseconds: 400),
       height: 120,
       width: 120,
-
-      /*  child: Carousel(
-        borderRadius: true,
-        images: [
-          Image.asset('assets/baby_icon4.jpg', fit: BoxFit.cover),
-          Image.asset('assets/newborn.jpg', fit: BoxFit.cover),
-          Image.asset('assets/baby_icon5.jpg', fit: BoxFit.cover),
-        ],
-        showIndicator: false,
-      ),*/
-      // child: Icon(FontAwesomeIcons.baby,
-      // size: 50, color: showsignin ? Colors.blueGrey : Colors.white),
     );
   }
 
@@ -345,16 +342,16 @@ class _LOgin2State extends State<LOgin2> {
       duration: Duration(milliseconds: 400),
       height: 250,
       width: wh / 1.2,
-      /*  decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.9),
+      decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.5),
           borderRadius: BorderRadius.circular(40),
           boxShadow: [
             BoxShadow(
-                color: Colors.blueGrey,
+                color: Colors.blueGrey.withOpacity(0.5),
                 spreadRadius: 0.1,
                 blurRadius: 1,
                 offset: Offset(0, 1))
-          ]),*/
+          ]),
       child: Form(
           key: formstate_signin,
           child: Container(
@@ -430,6 +427,7 @@ class _LOgin2State extends State<LOgin2> {
     ));
   }
 
+ 
   /*Positioned poisition_top(double wh) {
     return Positioned(
         child: Transform.scale(
@@ -463,7 +461,7 @@ class _LOgin2State extends State<LOgin2> {
           borderRadius: BorderRadius.circular(wh),
           color: showsignin
               ? Colors.pink[300].withOpacity(0.5)
-              : Colors.blueGrey[300],
+              : Colors.pinkAccent.withOpacity(0.5),
         ),
       ),
     );
@@ -473,14 +471,14 @@ class _LOgin2State extends State<LOgin2> {
     return Center(
         child: AnimatedContainer(
       duration: Duration(milliseconds: 400),
-      height: 360,
+      height: 330,
       width: wh / 1.2,
       decoration: BoxDecoration(
-          color: Colors.pinkAccent.withOpacity(0.5),
+          color: Colors.white.withOpacity(0.5),
           borderRadius: BorderRadius.circular(40),
           boxShadow: [
             BoxShadow(
-                color: Colors.blueGrey,
+                color: Colors.blueGrey.withOpacity(0.5),
                 spreadRadius: 0.1,
                 blurRadius: 1,
                 offset: Offset(0, 1))

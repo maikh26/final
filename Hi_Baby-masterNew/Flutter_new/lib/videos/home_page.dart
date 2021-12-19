@@ -32,86 +32,38 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _initData();
   }
+ _appbar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.deepPurple,
+        title: Text("     Videos For you"),
 
+      // context.themes.backgroundColor,
+      leading: GestureDetector(
+        onTap: () {
+          Get.back();
+        },
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.white,
+          size: 20,
+        ),
+      ),
+     
+
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            appBar: _appbar(),
+
       backgroundColor: color.AppColor.homePageBackground,
       body: Container(
-        padding: const EdgeInsets.only(top: 70, left: 30, right: 30),
+        padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "Activities",
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: color.AppColor.homePageTitle,
-                      fontWeight: FontWeight.w700),
-                ),
-                Expanded(child: Container()),
-                Icon(
-                  Icons.arrow_back_ios,
-                  size: 20,
-                  color: color.AppColor.homePageIcons,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Icon(
-                  Icons.calendar_today_outlined,
-                  size: 20,
-                  color: color.AppColor.homePageIcons,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                  color: color.AppColor.homePageIcons,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                Text(
-                  "your programe",
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: color.AppColor.homePageSubtitle,
-                      fontWeight: FontWeight.w700),
-                ),
-                Expanded(child: Container()),
-                Text(
-                  "Details",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: color.AppColor.homePageDetail,
-                  ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.to(() => videoInfo());
-                  },
-                  child: Icon(
-                    Icons.arrow_forward,
-                    size: 20,
-                    color: color.AppColor.homePageIcons,
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
+          
             Container(
               width: MediaQuery.of(context).size.width,
               height: 180,
@@ -142,16 +94,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Next Activity",
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: color.AppColor.homePageContainerTextSmall,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
+                    
                     Text(
                       "Baby Sleep",
                       style: TextStyle(
@@ -217,7 +160,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Container(
+            Container(                
+               padding: const EdgeInsets.only( top: 10),
+
               height: 88,
               width: MediaQuery.of(context).size.width,
               child: Stack(

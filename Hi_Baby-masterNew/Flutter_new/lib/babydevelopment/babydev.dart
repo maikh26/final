@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage>
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(20),
                   ),
-                  color: Colors.grey),
+                  color: Colors.white),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage>
                              // padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: Colors.brown[100],
+                                color: Colors.white,
                               ),
                              
                            
@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage>
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: Colors.grey,
+                                  color: Colors.white,
                                 ),
                                
                              ) ],
