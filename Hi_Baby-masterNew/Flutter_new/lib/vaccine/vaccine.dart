@@ -78,8 +78,8 @@ if ( year==1 && birth =='0') {
                             print(snapshot.data[15]['name']);
                          // int id = int.parse(myId.toString());
                           notifyHelper.scheduledNotification(
-                            5,
-                            10,
+                            9,
+                            50,
                             1,
                             'your baby  finished  one year',
                            'vaccine this month '+ snapshot.data[15]['name'],
@@ -94,7 +94,7 @@ if ( year==1 && birth =='0') {
                             5,
                             10,
                             1,
-                            'your baby  finished  one year',
+                            'your baby  finished  month 18',
                            'vaccine this month '+ snapshot.data[i]['name'],
                           );
                         }

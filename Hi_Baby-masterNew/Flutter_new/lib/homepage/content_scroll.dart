@@ -1,3 +1,4 @@
+import 'package:blogapp/homepage/detailsartivle.dart';
 import 'package:flutter/material.dart';
 //import '../models/models.dart';
 //import '../screens/screens.dart';
@@ -52,15 +53,20 @@ class ContentScroll extends StatelessWidget {
             scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int i) {
+
                   return GestureDetector(
                     onTap: () {
                       print("object");
                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => NewsScreen(  des: snapshot.data[i]['development'],
+                            builder: (_) => NewsScreen1( 
+                           des: snapshot.data[i]['des'],
                           title: snapshot.data[i]['title'],
-                          image:snapshot.data[i]['image']),
+                          image:snapshot.data[i]['image'],
+                          id: snapshot.data[i]['id'],
+                         counter: snapshot.data[i]['favcounter']
+                          ),
                           ),
                         );
                     },
@@ -136,7 +142,7 @@ class ContentScroll extends StatelessWidget {
     );
   }
   getData() async {
-    var url = Uri.parse("http://192.168.232.2/Hi_Baby/getdevelopment.php");
+    var url = Uri.parse("http://192.168.232.2/Hi_Baby/getarticle.php");
     var map = new Map<String, dynamic>();
     var respons = await http.post(url, body: map);
     var list = json.decode(respons.body);

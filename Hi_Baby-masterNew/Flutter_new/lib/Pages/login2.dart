@@ -217,7 +217,7 @@ class _LOgin2State extends State<LOgin2> {
         child: Scaffold(
             body: Stack(children: <Widget>[
           Image.asset(
-            "assets/loginphoto.jpg",
+            "assets/baby_mum.jpg",
             height: height,
             fit: BoxFit.fitHeight,
           ),
@@ -256,10 +256,10 @@ class _LOgin2State extends State<LOgin2> {
                             ? InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => forgetpass(),
-                  ),
-                );
+                                    MaterialPageRoute(
+                                      builder: (context) => forgetpass(),
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   "forget password ?",
@@ -342,7 +342,7 @@ class _LOgin2State extends State<LOgin2> {
       duration: Duration(milliseconds: 400),
       height: 250,
       width: wh / 1.2,
-      decoration: BoxDecoration(
+      /*decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.5),
           borderRadius: BorderRadius.circular(40),
           boxShadow: [
@@ -351,7 +351,7 @@ class _LOgin2State extends State<LOgin2> {
                 spreadRadius: 0.1,
                 blurRadius: 1,
                 offset: Offset(0, 1))
-          ]),
+          ]),*/
       child: Form(
           key: formstate_signin,
           child: Container(
@@ -427,7 +427,6 @@ class _LOgin2State extends State<LOgin2> {
     ));
   }
 
- 
   /*Positioned poisition_top(double wh) {
     return Positioned(
         child: Transform.scale(

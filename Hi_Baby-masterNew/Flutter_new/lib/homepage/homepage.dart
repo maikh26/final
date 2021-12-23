@@ -1,6 +1,7 @@
 import 'package:blogapp/homepage/news_en.dart';
 import 'package:flutter/material.dart';
 
+import 'bookmarks2.dart';
 import 'content_scroll.dart';
 import 'custom_drawer.dart';
 import 'devlist.dart';
@@ -221,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
             appBar: AppBar(
               toolbarHeight: 70, // Set this height
 
-              backgroundColor: Colors.teal,
+              backgroundColor: Colors.teal.withGreen(1),
               title: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -535,7 +536,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => doctor(),
+                                          builder: (context) => BookmarksScreen(),
                                         ),
                                       );
                                     },

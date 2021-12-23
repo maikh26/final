@@ -25,6 +25,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'Screens/landing_screen.dart';
 import 'grouth/input_page.dart';
+import 'homepage/bookmarks2.dart';
 import 'homepage/home.dart';
 import 'homepage/homepage.dart';
 

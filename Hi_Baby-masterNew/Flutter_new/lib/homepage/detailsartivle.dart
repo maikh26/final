@@ -1,28 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'circular_clipper.dart';
 import 'content_scroll.dart';
 import 'news_en.dart';
 //import '../models/models.dart';
 //import '../widgets/widgets.dart';
 
-class NewsScreen extends StatefulWidget {
+class NewsScreen1 extends StatefulWidget {
   final String des;
   final String title;
   final String image;
+  final String id;
+  final String counter;
 
-  NewsScreen({this.des, this.title, this.image});
+  NewsScreen1({this.des, this.title, this.image, this.id, this.counter});
 
   @override
-  _NewsScreenState createState() => _NewsScreenState();
+  _NewsScreen1State createState() => _NewsScreen1State();
 }
 
-class _NewsScreenState extends State<NewsScreen> {
+class _NewsScreen1State extends State<NewsScreen1> {
   bool isPlaying = false;
-    bool fav = false;
+  bool fav = false;
 
   FlutterTts _flutterTts = FlutterTts();
+
+  Future<String> updateTask(String id, String counter) async {
+    var ROOT = Uri.parse("http://192.168.232.2/Hi_Baby/updatefav.php");
+    print("mai");
+
+    try {
+      var map = new Map<String, dynamic>();
+      map["id"] = id;
+      map["counter"] = counter;
+      final response = await http.post(ROOT, body: map);
+      print("updatTask >> Response:: ${response.body}");
+      return response.body;
+    } catch (e) {
+      return 'error';
+    }
+  }
 
   @override
   void initState() {
@@ -89,6 +108,8 @@ class _NewsScreenState extends State<NewsScreen> {
     String description = widget.des;
     String title = widget.title;
     String image = widget.image;
+    String id = widget.id;
+    String counter = widget.counter;
 
     return Scaffold(
       body: ListView(
@@ -123,10 +144,22 @@ class _NewsScreenState extends State<NewsScreen> {
                   ),
                   IconButton(
                     padding: EdgeInsets.only(left: 30.0),
-                    onPressed: () => {print('Add to Favorites'),
-                    fav=false,
+                    onPressed: () => {
+                      setState(() {
+                        //updateTask(id, counter+'1');
+                        print('Add to Favorites');
+                        int coun = int.parse(counter.toString());
+                        coun = coun + 1;
+                        String count = coun.toString();
+
+                        updateTask(id, count);
+                        print(count);
+                        fav = false;
+                      })
                     },
-                   icon: fav? Icon(Icons.favorite): Icon(Icons.favorite_border),
+                    icon: fav
+                        ? Icon(Icons.favorite)
+                        : Icon(Icons.favorite_border),
                     iconSize: 30.0,
                     color: Theme.of(context).buttonColor,
                   ),
